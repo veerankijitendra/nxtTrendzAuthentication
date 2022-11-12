@@ -1,0 +1,47 @@
+/* Write your CSS code here */
+.home-l-image-heading-para-con {
+  width: 90%;
+  margin-top: 2rem;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.home-s-image-heading-para-con {
+  text-align: center;
+}
+@media all and (min-width: 768px) {
+  .home-s-image-heading-para-con {
+    text-align: start;
+    width: 55%;
+  }
+}
+
+.sm-cloths-image {
+  width: 60%;
+}
+@media all and (min-width: 768px) {
+  .sm-cloths-image {
+    display: none;
+  }
+}
+
+.shop-now-btn {
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.2rem;
+  height: 2.5rem;
+  min-width: 8rem;
+  background-color: #0b69ff;
+  font-size: 1.1rem;
+}
+.l-cloths-image {
+  width: 40%;
+}
+
+@media all and (max-width: 767px) {
+  .l-cloths-image {
+    display: none;
+  }
+}

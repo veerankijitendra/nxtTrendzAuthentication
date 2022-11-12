@@ -7,8 +7,13 @@ class LoginFoam extends Component {
 
   componentDidMount() {}
 
-  onChangeUsername = event =>
-    this.setState({username: event.target.value, isInvalidPassword: false})
+  onChangeUsername = event => {
+    this.setState({
+      username: event.target.value,
+      isInvalidPassword: false,
+      errorText: '',
+    })
+  }
 
   onChangePassword = event =>
     this.setState({password: event.target.value, isInvalidPassword: false})
@@ -28,18 +33,34 @@ class LoginFoam extends Component {
 
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data)
+    console.log(response)
     if (response.ok === true) {
       this.routeToHome(data)
     } else {
-      this.setState({isInvalidPassword: true})
+      this.setState({
+        isInvalidPassword: true,
+        errorText: '*Please Enter the Username and Password',
+      })
     }
   }
 
   submitForm = event => {
     event.preventDefault()
     this.setState({username: '', password: ''})
-    this.fetchCredential()
+    const {username, password} = this.state
+    if (username === '') {
+      this.setState({
+        isInvalidPassword: true,
+        errorText: '*Please Enter the Username',
+      })
+    } else if (password === '') {
+      this.setState({
+        isInvalidPassword: true,
+        errorText: '*Please Enter the Password',
+      })
+    } else {
+      this.fetchCredential()
+    }
   }
 
   renderUsernameInput = () => {
@@ -81,7 +102,7 @@ class LoginFoam extends Component {
   }
 
   render() {
-    const {isInvalidPassword} = this.state
+    const {isInvalidPassword, errorText} = this.state
     return (
       <>
         <div className="login-form-bg">
@@ -108,9 +129,7 @@ class LoginFoam extends Component {
             <button type="submit" className="login-btn">
               Login
             </button>
-            {isInvalidPassword && (
-              <p className="error-msg">*User name not found</p>
-            )}
+            {isInvalidPassword && <p className="error-msg">{errorText}</p>}
           </form>
         </div>
       </>
